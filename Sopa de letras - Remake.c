@@ -1,6 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <string.h> // strlen()
+#include <time.h> // rand()
+#define up 0, down 1, left 2, right 3, upLeft 4, upRight 5, downLeft 6, downRight 7
+#define true 1
+#define false 0
+
+struct Word
+{
+    char *word;
+    int X;
+    int Y;
+    int orientation;
+};
 
 void clean()
 {
@@ -74,34 +86,67 @@ char *requestWord(int soupSize)
 
 void clearAlphabetSoup(int soupSize, char alphabetSoup[soupSize][soupSize])
 {
-    int i, j;
-    for (i = 0; i < soupSize; i++)
-        for (j = 0; j < soupSize; j++)
-            alphabetSoup[i][j] = '#';
+    int x, y;
+    for (y = 0; y < soupSize; y++)
+        for (x = 0; x < soupSize; x++)
+            alphabetSoup[y][x] = '#';
 }
 void displayAlphabetSoup(int soupSize, char alphabetSoup[soupSize][soupSize])
 {
-    int i, j;
-    for (i = 0; i < soupSize; i++)
+    int x, y;
+    for (y = 0; y < soupSize; y++)
     {
-        for (j = 0; j < soupSize; j++)
-            printf("[%c]", alphabetSoup[i][j]);
+        for (x = 0; x < soupSize; x++)
+            printf("[%c]", alphabetSoup[y][x]);
         printf("\n");
     }
+}
+int calculateSpace(struct Word word)
+{
+    int lenghtString = strlen(word.word);
+    word.
 }
 
 int main()
 {
+    srand(time(NULL));
+    int i;
+    struct Word word;
     int soupSize = requestSoupSize();
     int quantityWords = requestQuantityWords(soupSize);
-    int i;
-    for (i = 0; i < quantityWords; i++)
+
+    char alphabetSoup[soupSize][soupSize];
+    clearAlphabetSoup(soupSize, alphabetSoup);
+    for (i = 0; i < down; i++)
     {
+        int hasSpace = false;
+        clean();
         printf("Palabra %d de %d.\n", i + 1, quantityWords);
-        char *word = requestWord(soupSize);
+        word.word = requestWord(soupSize);
+        do
+        {
+            word.X = rand() % soupSize;
+            word.Y = rand() % soupSize;
+            word.orientation = rand() % 8;
+            hasSpace = calculateSpace(word);
+        } while (hasSpace == false);
+        // Asignar una dirección aleatoria para la palabra.
+        // Verificar de que quepa la palabra en la orientación seleccionada, sino volver a generar una orientación aleatoria
+        // Insertar la palabra en la sopa de letras según la orientación generada.
     }
-    //char alphabetSoup[soupSize][soupSize];
-    //clearAlphabetSoup(soupSize, alphabetSoup);
     // displayAlphabetSoup(soupSize, alphabetSoup);
     return 0;
 }
+
+// *----------------------------------------------------------------*
+// | N° Depósito | N° de Artículo | N° Vendedor | Valor de la venta |
+// *----------------------------------------------------------------*
+// |       39213 |              2 |       42323 |          $199 990 |
+// *----------------------------------------------------------------*
+
+
+
+
+
+
+
